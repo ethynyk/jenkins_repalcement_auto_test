@@ -1,0 +1,108 @@
+# ============ audio_ut: test environment ============
+test_environment_configs:
+  - action: download
+    desc: "下载sample文件"
+    source: "ftp://swftp:cvitek@10.80.0.5/sw_rls/daily_build/athena2/sophon-img-device-auto/${branch}/${sdk_version}/images/tools/board/sample_bin/<^sample_audio_.*>"
+    target: "${host_ws}/"
+
+  - action: download
+    desc: "下载测试脚本"
+    source: "ftp://visitors:123456visitors@10.80.38.1/media/cvitek/auto_test/TEST/athena2/audio/cviaudio_test_script.sh"
+    target: "${host_ws}/"
+
+  - action: rename
+    desc: "删除sample_audio_nr的.64bit后缀"
+    source: "${host_ws}/sample_audio_nr.64bit"
+    target: "${host_ws}/sample_audio_nr"
+
+  - action: rename
+    desc: "删除sample_audio_aec的.64bit后缀"
+    source: "${host_ws}/sample_audio_aec.64bit"
+    target: "${host_ws}/sample_audio_aec"
+
+  - action: rename
+    desc: "删除sample_audio_internal的.64bit后缀"
+    source: "${host_ws}/sample_audio_internal.64bit"
+    target: "${host_ws}/sample_audio_internal"
+
+  - action: rename
+    desc: "删除sample_audio_resample的.64bit后缀"
+    source: "${host_ws}/sample_audio_resample.64bit"
+    target: "${host_ws}/sample_audio_resample"
+
+  - action: rename
+    desc: "删除sample_audio_transcode的.64bit后缀"
+    source: "${host_ws}/sample_audio_transcode.64bit"
+    target: "${host_ws}/sample_audio_transcode"
+
+# ============ audio_ut: test case ============
+test_cases:
+  aud_in:
+    - case: ./cviaudio_test_script.sh AudIn
+      check_res: AudIn TEST-ALL-PASS
+      runtime: 600
+
+  aud_out:
+    - case: ./cviaudio_test_script.sh AudOut
+      check_res: AudOut TEST-ALL-PASS
+      runtime: 600
+
+  aud_transcode:
+    - case: ./cviaudio_test_script.sh AudTranscode
+      check_res: AudTranscode TEST-ALL-PASS
+      runtime: 600
+
+  aud_resample:
+    - case: ./cviaudio_test_script.sh AudResample
+      check_res: AudResample TEST-ALL-PASS
+      runtime: 600
+
+  aud_aec:
+    - case: ./cviaudio_test_script.sh AudAEC
+      check_res: AudAEC TEST-ALL-PASS
+      runtime: 600
+
+  aud_anr:
+    - case: ./cviaudio_test_script.sh AudANR
+      check_res: AudANR TEST-ALL-PASS
+      runtime: 600
+
+  aud_up_record:
+    - case: ./cviaudio_test_script.sh AudUpRecord
+      check_res: AudUpRecord TEST-ALL-PASS
+      runtime: 600
+
+  aud_up_vqe:
+    - case: ./cviaudio_test_script.sh AudUpVQE
+      check_res: AudUpVQE TEST-ALL-PASS
+      runtime: 600
+
+  aud_up_enc:
+    - case: ./cviaudio_test_script.sh AudUpEnc
+      check_res: AudUpEnc TEST-ALL-PASS
+      runtime: 600
+
+  aud_up_bind:
+    - case: ./cviaudio_test_script.sh AudUpBind
+      check_res: AudUpBind TEST-ALL-PASS
+      runtime: 600
+
+  aud_up_user:
+    - case: ./cviaudio_test_script.sh AudUpUser
+      check_res: AudUpUser TEST-ALL-PASS
+      runtime: 600
+
+  aud_up_vqe_aec:
+    - case: ./cviaudio_test_script.sh AudUpVqeAec
+      check_res: AudUpVqeAec TEST-ALL-PASS
+      runtime: 600
+
+  aud_play_out:
+    - case: ./cviaudio_test_script.sh AudPlayOut
+      check_res: AudPlayOut TEST-ALL-PASS
+      runtime: 600
+
+  aud_resample_out:
+    - case: ./cviaudio_test_script.sh AudResampleOut
+      check_res: AudResampleOut TEST-ALL-PASS
+      runtime: 600

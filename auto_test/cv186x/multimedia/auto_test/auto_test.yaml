@@ -1,0 +1,83 @@
+# ============ auto_test: test environment ============
+test_environment_configs:
+  - action: download
+    desc: "下载测试用例"
+    source: "ftp://swftp:cvitek@10.80.0.5/sw_rls/daily_build/athena2/sophon-img-device-auto/${branch}/${sdk_version}/images/tools/board/ut_bin/auto_test.64bit"
+    target: "${host_ws}/"
+
+  - action: download
+    desc: "下载run_vi_ut.sh"
+    source: "ftp://visitors:123456visitors@10.80.38.1/media/cvitek/auto_test/TEST/athena2/auto_test/run_vi_ut.sh"
+    target: "${host_ws}/test/"
+
+  - action: rename
+    desc: "暂时移动从ftp下载的res中的文件到其他目录"
+    source: "${host_ws}/res"
+    target: "${host_ws}/tmp"
+
+  - action: board_link
+    desc: "板端, 将测试资料res从/mnt/sd/res/res软连接到测试路径中"
+    source: "/mnt/sd/res_a2/res"
+    target: "${test_path}/"
+
+  - action: board_move
+    desc: "板端, 移走的res移回来"
+    source: "${test_path}/tmp/*"
+    target: "${test_path}/res/"
+
+# ============ auto_test: test case ============
+test_cases:
+  dpu_ut:
+    - case: ./run_test.sh ./test/run_dpu_ut.sh
+      check_res: middleware dpu_ut TEST-PASS
+      runtime: 600
+
+  rgn_ut:
+    - case: ./run_test.sh ./test/run_rgn_ut.sh
+      check_res: middleware rgn_ut TEST-PASS
+      runtime: 600
+
+  vi_ut:
+    - case: ./run_test.sh ./test/run_vi_ut.sh
+      check_res: middleware vi_ut TEST-PASS
+      runtime: 600
+
+  tde_ut:
+    - case: ./run_test.sh ./test/run_tde_ut.sh
+      check_res: middleware tde_ut TEST-PASS
+      runtime: 600
+
+  ive_ut:
+    - case: ./run_test.sh ./test/run_ive_ut.sh
+      check_res: middleware ive_1st_ut ive_2nd_ut ive_bg_ut TEST-PASS
+      runtime: 600
+
+  sys_ut:
+    - case: ./run_test.sh ./test/run_sys_ut.sh
+      check_res: middleware sys_ut TEST-PASS
+      runtime: 600
+
+  vb_ut:
+    - case: ./run_test.sh ./test/run_vb_ut.sh
+      check_res: middleware vb_ut TEST-PASS
+      runtime: 600
+
+  vo_ut:
+    - case: ./run_test.sh ./test/run_vo_ut.sh
+      check_res: middleware vo_ut TEST-PASS
+      runtime: 600
+
+  stitch_ut:
+    - case: ./run_test.sh ./test/run_stitch_ut.sh
+      check_res: middleware stitch_ut TEST-PASS
+      runtime: 600
+
+  vpss_ut:
+    - case: ./run_test.sh ./test/run_vpss_ut.sh
+      check_res: middleware vpss_ut TEST-PASS
+      runtime: 600
+
+  gdc_ut:
+    - case: ./run_test.sh ./test/run_gdc_ut.sh
+      check_res: middleware gdc_ut TEST-PASS
+      runtime: 600

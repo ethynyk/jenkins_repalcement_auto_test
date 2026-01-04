@@ -1,0 +1,38 @@
+# ============ vc_ut: test environment ============
+test_environment_configs:
+  - action: download
+    desc: "下载测试脚本"
+    source: "ftp://visitors:123456visitors@10.80.38.1/media/cvitek/auto_test/TEST/athena2/vc_ut/vc_ut"
+    target: "${host_ws}/"
+
+  - action: download
+    desc: "下载sample_venc文件"
+    source: "ftp://swftp:cvitek@10.80.0.5/sw_rls/daily_build/athena2/sophon-img-device-auto/${branch}/${sdk_version}/images/tools/board/sample_bin/sample_vdec.64bit"
+    target: "${host_ws}/sample/"
+
+  - action: download
+    desc: "下载sample_vdec文件"
+    source: "ftp://swftp:cvitek@10.80.0.5/sw_rls/daily_build/athena2/sophon-img-device-auto/${branch}/${sdk_version}/images/tools/board/sample_bin/sample_venc.64bit"
+    target: "${host_ws}/sample/"
+
+  - action: rename
+    desc: "删除sample_vdec的.64bit后缀"
+    source: "${host_ws}/sample/sample_vdec.64bit"
+    target: "${host_ws}/sample/sample_vdec"
+
+  - action: rename
+    desc: "删除sample_venc的.64bit后缀"
+    source: "${host_ws}/sample/sample_venc.64bit"
+    target: "${host_ws}/sample/sample_venc"
+
+# ============ vc_ut: test case ============
+test_cases:
+  dec:
+    - case: ./test-all.sh dec
+      check_res: Dec -- ALL-PASS
+      runtime: 7200
+
+  enc:
+    - case: ./test-all.sh enc
+      check_res: Enc -- ALL-PASS
+      runtime: 7200

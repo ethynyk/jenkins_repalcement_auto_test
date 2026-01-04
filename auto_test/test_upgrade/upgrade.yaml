@@ -1,0 +1,50 @@
+cv1842hp_wevb_0014a_spinor: &cv184x_spinor
+  upgrade:
+    desc: "SD卡启动"
+    cmds:
+      - reboot
+      - run norboot
+    runtime:
+      - 100
+      - 30
+
+cv1842cp_wevb_0015a_spinor:
+  <<: *cv184x_spinor
+
+cv1842cp_wevb_0015a_spinand: &cv184x_spinand
+  upgrade:
+    desc: "SD卡启动"
+    cmds:
+      - reboot
+      - run nandboot
+    runtime:
+      - 100
+      - 30
+
+cv1843hp_wevb_0014a_emmc: &cv184x_emmc
+  upgrade:
+    desc: "SD卡启动"
+    cmds:
+      - reboot
+      - run emmcboot
+    runtime:
+      - 100
+      - 30
+
+cv1842hp_wevb_0014a_emmc:
+  <<: *cv184x_emmc
+
+cv1843hp_wevb_0014a_spinor:
+  <<: *cv184x_spinor
+
+device_wevb_emmc: &device_emmc
+  upgrade:
+    desc: "SD卡启动"
+    cmds:
+      - reboot
+      - setenv DTS_TYPE config-cv186ah_wevb_8G
+      - run emmcboot
+    runtime:
+      - 100
+      - 3
+      - 100

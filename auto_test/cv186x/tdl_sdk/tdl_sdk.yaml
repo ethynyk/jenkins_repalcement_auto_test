@@ -1,0 +1,43 @@
+# ============ tdl_sdk: test environment ============
+test_environment_configs:
+  - action: download
+    desc: "下载tdl_sdk包"
+    source: "ftp://swftp:cvitek@10.80.0.5/sw_rls/daily_build/athena2/sophon-img-device-auto/${branch}/${sdk_version}/internal/64bit/cvitek_tdl_sdk_internal.64bit.tar.gz"
+    target: "${host_ws}/"
+
+  - action: download
+    desc: "下载tpu_mlir包"
+    source: "ftp://swftp:cvitek@10.80.0.5/sw_rls/ai_models/${model_ver}/tpu_mlir_ai_models_cv186x.tar.gz"
+    target: "${host_ws}/"
+
+  - action: download
+    desc: "下载测试脚本"
+    source: "ftp://swftp:cvitek@10.80.0.5/sw_rls/ai_models/${model_ver}/aisdk_daily_regression.tgz"
+    target: "${host_ws}/"
+
+  - action: extract
+    desc: "解压tdl_sdk包"
+    source: "${host_ws}/cvitek_tdl_sdk_internal.64bit.tar.gz"
+    target: "${host_ws}/"
+
+  - action: extract
+    desc: "解压tpu_mlir模型包"
+    source: "${host_ws}/tpu_mlir_ai_models_cv186x.tar.gz"
+    target: "${host_ws}/cvitek_tdl_sdk/"
+
+  - action: extract
+    desc: "解压测试脚本"
+    source: "${host_ws}/aisdk_daily_regression.tgz"
+    target: "${host_ws}/cvitek_tdl_sdk/"
+
+  - action: download
+    desc: "下载自动测试脚本"
+    source: "ftp://visitors:123456visitors@10.80.38.1/media/cvitek/auto_test/TEST/cv184x/tdl_sdk/test-ai.sh"
+    target: "${host_ws}/"
+
+# ============ tdl_sdk: test case ============
+test_cases:
+  tdl_sdk:
+    - case: ./test-ai.sh
+      check_res: PASSED  ] 30 tests.
+      runtime: 600

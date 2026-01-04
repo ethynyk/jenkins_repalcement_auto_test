@@ -1,0 +1,38 @@
+# ============ mediapipe: test environment ============
+test_environment_configs:
+  - action: download
+    desc: "下载mediapipe.tar.gz"
+    source: "ftp://AI:SophgoRelease2022@172.28.141.89/athena2/sophon-img-device-auto/daily_build/latest_release/images/mediapipe.tar.gz"
+    target: "${host_ws}/"
+
+  - action: extract
+    desc: "解压mediapipe.tar.gz"
+    source: "${host_ws}/mediapipe.tar.gz"
+    target: "${host_ws}/"
+
+  - action: download
+    desc: "下载sample_panel"
+    source: "ftp://AI:SophgoRelease2022@172.28.141.89/athena2/sophon-img-device-auto/daily_build/latest_release/images/tools/board/sample_bin/sample_panel"
+    target: "${host_ws}/install"
+
+  - action: download
+    desc: "下载auto_test.sh"
+    source: "ftp://visitors:123456visitors@10.80.38.1/media/cvitek/auto_test/LTPU-dev/testcases/cv186x/multimedia/mediapipe/auto_test.sh"
+    target: "${host_ws}/install/"
+
+  - action: move
+    desc: "移动mediapipe中的文件到当前目录下"
+    source: "${host_ws}/install/<.*>"
+    target: "${host_ws}/"
+
+  - action: board_copy
+    desc: "板端, sensor_cfg.ini拷贝到/mnt/data"
+    source: "/mnt/sd/res_a2/sensor_cfgs/sensor_cfg.ini*"
+    target: "/mnt/data/sensor_cfg.ini"
+
+# ============ mediapipe: test case ============
+test_cases:
+  basic_ini:
+    - case: ./auto_test.sh simple_pipe basic.ini 60
+      check_res: basic.ini TEST-PASS
+      runtime: 1000

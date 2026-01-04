@@ -1,0 +1,130 @@
+# ============ sample: test environment ============
+test_environment_configs:
+  - action: download
+    desc: "下载sample bin"
+    source: "ftp://AI:SophgoRelease2022@172.28.141.89/athena2/sophon-img-device-auto/daily_build/latest_release/images/tools/board/sample_bin"
+    target: "${host_ws}/"
+
+  - action: board_link
+    desc: "板端, 将测试资料res从/mnt/sd/res/res软连接到测试路径中"
+    source: "/mnt/sd/res_a2/res"
+    target: "${test_path}/"
+
+  - action: download
+    desc: "下载run_sample*.sh和auto_test.sh"
+    source: "ftp://visitors:123456visitors@10.80.38.1/media/cvitek/auto_test/TEST/athena2/multimedia/sample"
+    target: "${host_ws}/"
+
+  - action: board_copy
+    desc: "板端, sensor_cfg.ini拷贝到/mnt/data"
+    source: "/mnt/sd/res_a2/sensor_cfgs/sensor_cfg.ini*"
+    target: "/mnt/data/sensor_cfg.ini"
+
+  - action: rename
+    desc: "删除sample_audio_nr的.64bit后缀"
+    source: "${host_ws}/sample_audio_nr.64bit"
+    target: "${host_ws}/sample_audio_nr"
+
+  - action: rename
+    desc: "删除sample_audio_aec的.64bit后缀"
+    source: "${host_ws}/sample_audio_aec.64bit"
+    target: "${host_ws}/sample_audio_aec"
+
+  - action: rename
+    desc: "删除sample_audio_internal的.64bit后缀"
+    source: "${host_ws}/sample_audio_internal.64bit"
+    target: "${host_ws}/sample_audio_internal"
+
+  - action: rename
+    desc: "删除sample_audio_resample的.64bit后缀"
+    source: "${host_ws}/sample_audio_resample.64bit"
+    target: "${host_ws}/sample_audio_resample"
+
+  - action: rename
+    desc: "删除sample_audio_transcode的.64bit后缀"
+    source: "${host_ws}/sample_audio_transcode.64bit"
+    target: "${host_ws}/sample_audio_transcode"
+
+  - action: rename
+    desc: "删除sample_audio的.64bit后缀"
+    source: "${host_ws}/sample_audio.64bit"
+    target: "${host_ws}/sample_audio"
+
+  - action: rename
+    desc: "删除sample_gdc的.64bit后缀"
+    source: "${host_ws}/sample_gdc.64bit"
+    target: "${host_ws}/sample_gdc"
+
+  - action: rename
+    desc: "删除sample_region的.64bit后缀"
+    source: "${host_ws}/sample_region.64bit"
+    target: "${host_ws}/sample_region"
+
+  - action: rename
+    desc: "删除sample_panel的.64bit后缀"
+    source: "${host_ws}/sample_panel.64bit"
+    target: "${host_ws}/sample_panel"
+
+  - action: rename
+    desc: "删除sample_vio的.64bit后缀"
+    source: "${host_ws}/sample_vio.64bit"
+    target: "${host_ws}/sample_vio"
+
+  - action: rename
+    desc: "删除sample_vpss的.64bit后缀"
+    source: "${host_ws}/sample_vpss.64bit"
+    target: "${host_ws}/sample_vpss"
+
+  - action: rename
+    desc: "删除sample_vio的.64bit后缀"
+    source: "${host_ws}/sample_tde.64bit"
+    target: "${host_ws}/sample_tde"
+
+  - action: rename
+    desc: "删除sensor_test的.64bit后缀"
+    source: "${host_ws}/sensor_test.64bit"
+    target: "${host_ws}/sensor_test"
+
+
+# ============ sample: test case ============
+test_cases:
+  sample_audio:
+    - case: ./auto_test.sh sample_audio
+      check_res: AUDIO-TEST-PASS
+      runtime: 1000
+
+  sample_gdc:
+    - case: ./auto_test.sh sample_gdc
+      check_res: TEST-PASS
+      runtime: 1000
+
+  sample_panel:
+    - case: ./auto_test.sh sample_panel
+      check_res: PANEL-TEST-PASS
+      runtime: 1000
+
+
+  sensor_test:
+    - case: ./auto_test.sh senser_test
+      check_res: SENSOR-TEST-PASS
+      runtime: 1000
+
+  sample_tde:
+    - case: ./auto_test.sh sample_tde
+      check_res: TDE-TEST-PASS
+      runtime: 1000
+
+  sample_vpss:
+    - case: ./auto_test.sh sample_vpss
+      check_res: VPSS-TEST-PASS
+      runtime: 1000
+
+  sample_vio:
+    - case: ./auto_test.sh sample_vio
+      check_res: VIO-TEST-PASS
+      runtime: 1000
+
+  sample_region:
+    - case: ./auto_test.sh sample_region
+      check_res: REGION-TEST-PASS
+      runtime: 1000

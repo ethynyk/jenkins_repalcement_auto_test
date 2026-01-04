@@ -1,0 +1,4 @@
+2026-01-01 10:06:41 INFO Serial "/dev/ttyUSB0" connect success!
+2026-01-01 10:06:41 INFO Copied /media/cvitek/ke.yi/nfs_server/jenkins_repalcement_auto_test/auto_test/test_upgrade/upgrade.zip to /media/cvitek/ke.yi/nfs_server/20260101100547
+2026-01-01 10:06:41 INFO Serial cmd: send command "umount /mnt/nfs" to /dev/ttyUSB0
+2026-01-01 10:06:41 INFO ****** return messages start ******

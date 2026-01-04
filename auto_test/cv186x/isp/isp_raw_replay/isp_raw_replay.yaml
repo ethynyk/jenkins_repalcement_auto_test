@@ -1,0 +1,23 @@
+# ============ isp_raw_replay: test environment ============
+test_environment_configs:
+  - action: download
+    desc: "下载测试脚本"
+    source: "ftp://visitors:123456visitors@10.80.38.1/media/cvitek/auto_test/TEST/athena2/isp_raw_replay_test/isp_test_data"
+    target: "${host_ws}/"
+
+  - action: download
+    desc: "下载bin文件raw_replay_test"
+    source: "ftp://swftp:cvitek@10.80.0.5/sw_rls/daily_build/athena2/sophon-img-device-auto/${branch}/${sdk_version}/images/tools/board/raw_replay_test.64bit"
+    target: "${host_ws}/"
+
+  - action: rename
+    desc: "删除raw_replay_test的64bit后缀"
+    source: "${host_ws}/raw_replay_test.64bit"
+    target: "${host_ws}/raw_replay_test"
+
+# ============ isp_raw_replay: test case ============
+test_cases:
+  isp_raw_replay:
+    - case: ./oc_raw_replay_test.sh
+      check_res: md5 test success
+      runtime: 300

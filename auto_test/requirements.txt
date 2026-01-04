@@ -1,0 +1,12 @@
+pytest_html==4.1.1
+paramiko==3.5.1
+pyserial==3.5
+pytest==8.4.0
+PyYAML==6.0.2
+pytest-ordering==0.6
+# the follows is for test isp
+pytesseract==0.3.13
+pyautogui==0.9.54
+numpy==2.3.0
+ping3==4.0.8
+opencv-python==4.11.0.86

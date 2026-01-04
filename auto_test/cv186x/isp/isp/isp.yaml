@@ -1,0 +1,54 @@
+# ============ isp: test environment ============
+test_environment_configs:
+  - action: download
+    desc: "下载isp_tool_daemon包"
+    source: "ftp://swftp:cvitek@10.80.0.5/sw_rls/daily_build/athena2/sophon-img-device-auto/${branch}/${sdk_version}/images/tools/board/isp_tool_daemon.tar.gz.64bit"
+    target: "${host_ws}/"
+
+# 可以考虑把PyautoTest工具的代码放在gerrit上，随dailybuild下载
+  - action: download
+    desc: "下载PyautoTest工具"
+    source: "ftp://visitors:123456visitors@10.80.38.1/media/cvitek/auto_test/TEST/athena2/isp/PyautoTest.zip"
+    target: "${host_ws}/"
+
+  - action: download
+    desc: "下载cvipqtool工具"
+    source: "ftp://swftp:cvitek@10.80.0.5/sw_rls/daily_build/tools/CviPQtool/${cvipqtool_ver}/<CviPQtool_\\d{8}\\.zip>"
+    target: "${host_ws}/"
+
+  - action: extract
+    desc: "解压isp_tool_daemon包"
+    source: "${host_ws}/isp_tool_daemon.tar.gz.64bit"
+    target: "${host_ws}/"
+
+  - action: extract
+    desc: "解压PyautoTest.zip"
+    source: "${host_ws}/PyautoTest.zip"
+    target: "${host_ws}/"
+
+  - action: extract
+    desc: "解压cvipqtool"
+    source: "${host_ws}/<CviPQtool_\\d{8}\\.zip>"
+    target: "${host_ws}/ISPTOOL/"
+
+  - action: move
+    desc: "PyautoTest中的文件移动到ISPTOOL中"
+    source: "${host_ws}/PyautoTest/<.*>"
+    target: "${host_ws}/ISPTOOL/"
+
+  - action: download
+    desc: "下载sensor_cfg.ini"
+    source: "ftp://visitors:123456visitors@10.80.38.1/media/cvitek/auto_test/TEST/athena2/isp/sensor_cfg.ini"
+    target: "${host_ws}/install/"
+
+  - action: download
+    desc: "下载测试脚本"
+    source: "ftp://visitors:123456visitors@10.80.38.1/media/cvitek/auto_test/TEST/athena2/isp/oc_isp_tool_daemon.sh"
+    target: "${host_ws}/install/"
+
+# ============ isp: test case ============
+test_cases:
+  isp:
+    - case: ./install/oc_isp_tool_daemon.sh
+      check_res: pass
+      runtime: 20
